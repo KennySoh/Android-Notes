@@ -49,3 +49,59 @@ class MainActivity: AppCompatActivity(){
 }
 
 ```
+
+A different way function call by both left right button to share code
+```kotlin
+fun leftButtonClick{
+   checkIfCorrectAnswer(true)
+}
+
+fun rightButtonClick{
+   checkIfCorrectAnswer(false)
+}
+
+fun checkIfCorrectAnswer(isLeft: Boolean){
+   val leftButton=findViewByID<Button>(R.id.left_Button)
+   val rightButton=findViewByID<Button>(R.id.right_Button)
+   val leftNum: Int= leftButton.text.toString().toInt
+   val rightNum: Int= rightButton.text.toString().toInt
+   if (leftNum > rightNum){
+      //you win!
+      points++
+   } else {
+      //you lose!
+      points--
+   }
+   findViewById<TextView>(R.id.points).text="Points: $points"
+}
+```
+
+Displaying Toasts
+``` kotlin
+   Toast.makeText(context:this, text:Ÿou got this", Toast.LENGTH_SHORT)
+```
+
+###Sizing and positioning 
+Absolute positioning (C++,c# etc)
+Layout managers (Java, Kotlin, Android):
+
+ViewGroup
+- layouts are described in XML
+- Android provides several pre-existing layout managers; you can define your own cutsom layouts if needed
+- layouts can be nested to achieve combinations of features
+
+in the Java code and XML
+- an Activity is a ViewGroup
+- various Layout classes are also ViewGroups
+- widgets can be added to a ViewGroup, which will then manage that widget's position/size behavior
+
+XML (Data Markup), Describing hierarchical text data
+``` XML
+<course name="CS193A"quarter="19wi">
+   <instructor>Marty Stepp</instructor>
+   <ta>none</ta>
+</course>
+```
+
+
+
