@@ -115,14 +115,14 @@ LinearLayout
    />
    </LinearLayout>
 ```
-Margin
-   Border
-      Padding
-         Content
+Margin<br />
+   Border<br />
+      Padding<br />
+         Content<br />
 
 Gridlayout Nestedlayout Constraintlayout
 
-Constraint layout
+Constraint layout<br />
 - anchor points ( for vertical and horizontal sides)
 
 ## Lec03: Widgets, Lists
@@ -137,3 +137,13 @@ class MainActivity: AppCompatActivity(){
     }
 }
 
+Common widget attributes
+android:clickable="bool" set to false to disable
+```
+
+| Tables| Area|
+| -------------|:-------------:|
+| android:clickable="bool"       | set to false to disable              |
+| android:id="@+id/id"           | unique ID for use in Kotlin code     |
+| android:onClick="function"     | function to call in activity when clicked <br />(mustbe public,void and take a View arg)|
+| android:text="text"           | text to put in the button    |
