@@ -1,5 +1,5 @@
 # Android Notes
-## Layout
+## Lec02: Layout
 add widget to layout <br />
 set individual properties <br />
 
@@ -103,5 +103,37 @@ XML (Data Markup), Describing hierarchical text data
 </course>
 ```
 
+LinearLayout
+-orientation horizontal or vertical 
+``` XML
+<LinearLayout...
+   android:orientation="horizontal"
+   android:gravity="center|right">
+   <Button
+      andriod:gravity="left"
+      android:layout_weight=1
+   />
+   </LinearLayout>
+```
+Margin
+   Border
+      Padding
+         Content
 
+Gridlayout Nestedlayout Constraintlayout
+
+Constraint layout
+- anchor points ( for vertical and horizontal sides)
+
+## Lec03: Widgets, Lists
+Widgets: 
+1. declare/position it in your layout XML file
+2. add any event handling code to your kotlin code file
+```kotlin
+class MainActivity: AppCompatActivity(){
+   ...
+   fun myButtonClick(view: View){
+      // event-handling code goes here
+    }
+}
 
