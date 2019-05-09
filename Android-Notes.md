@@ -207,6 +207,7 @@ definitions_list.setOnItemClickListener{_,_,index,_ ->
 ( Instead )
 private var defns
 private var myAdapter
+<!-- private lateinit var myAdapter: ArrayAdapter<String> -->
 
 definitions_list.setOnItemClickListener{_,_,index,_ ->
    defns.remove(index)
@@ -216,3 +217,25 @@ defns= ArrayList<String>()
 myAdapter= ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,defns)
 
 
+Files & Storage 
+- internal storage :private to app
+- external storage :shared file system used by all apps
+
+Internal
+- res/raw
+
+File and Stream Objects
+-File
+-InputSteam, OutputStream (not usuall used directly, wrap them in a reader or scanner )
+- BufferedReader & Scanner 
+
+```kotlin
+private fun readDictionaryFile(){
+   val reader= Scanner(resources.openRawResource(R.raw.grewords))
+   while (reader.hasNextLine()){
+      val line = reader.nextLine()
+      Log.d("tag","the line i: $line")
+      val pieces = line/split("\t")
+      wordToDefn.put(pieces[0], pieces[1])
+   }
+}
