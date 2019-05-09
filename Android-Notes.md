@@ -147,3 +147,72 @@ android:clickable="bool" set to false to disable
 | android:id="@+id/id"           | unique ID for use in Kotlin code     |
 | android:onClick="function"     | function to call in activity when clicked <br />(mustbe public,void and take a View arg)|
 | android:text="text"           | text to put in the button    |
+
+
+- Text Edit, Hint, Input Type (will change the keyboard)
+- res/drawable > images
+- ImageView, Resource >XML (android:src = "@drawable/tmntleo" , id="@+id/imageView", scaleType
+- CheckBox (link)
+- RadioButton (non mutually exclusive)-> Radiogroup (group RadioButtons Together , for mutually exclusive)
+- Switch (link)
+
+Link radiobuttons onclick to radioButtonClick function
+```kotlin
+fun radioButtonClick(view: View){
+   // To identify which radio button
+   if(view== rb_leo){
+      turtle.setImageResource(R.drawable.tmntleo)
+   }
+   
+   // Kotlin Switch
+    when(view){
+       rb_leo->turtLe.setImageResource(R.drawable.tmntleo)
+    }
+    // 2 Kotlin Switch
+     val id=when(view){
+       rb_leo->R.drawable.tmntleo
+       else R.drawable.default
+    }
+}
+```
+List 
+onCreate> 
+characterList.setOnItemClickListener{
+   //Write a function 
+}
+
+## Lec 4 More Lists ; Files
+List adapter
+
+val list=ArrayList<String?()
+list.add("Hello")
+list.add("Goodbye")
+
+val rand=Random()
+val index=rand.nextInt(list.size)
+val word=list[index]
+
+val defns= ArrayList<String>()
+defns.add("a gretting")
+
+( Error> Log Cat , too early to set Adapter)
+private val defns= ArrayList<String>()
+private val myAdapter= ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,defns)
+
+definitions_list.setOnItemClickListener{_,_,index,_ ->
+   defns.remove(index)
+   myAdapter.notifyDataSetChanged()
+}
+
+( Instead )
+private var defns
+private var myAdapter
+
+definitions_list.setOnItemClickListener{_,_,index,_ ->
+   defns.remove(index)
+   myAdapter.notifyDataSetChanged()
+}
+defns= ArrayList<String>()
+myAdapter= ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,defns)
+
+
