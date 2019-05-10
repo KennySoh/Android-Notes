@@ -241,7 +241,7 @@ private fun readDictionaryFile(){
 }
 ```
 
-#Lec 05 Multiple acitivites and intents
+## Lec 05 Multiple acitivites and intents
 - Create activity, addWordActivity and addWord.xml
 - Create Layout in XML (Create Widgets and Layout)
 
