@@ -239,3 +239,71 @@ private fun readDictionaryFile(){
       wordToDefn.put(pieces[0], pieces[1])
    }
 }
+```
+
+#Lec 05 Multiple acitivites and intents
+- Create activity, addWordActivity and addWord.xml
+- Create Layout in XML (Create Widgets and Layout)
+
+Activity and Intent.
+Intent an object representing a desired action
+
+```xml
+<--AndroidManifest.xml-->
+<activity android:name=".MainActivity">
+<intent-filter Mainactivity> 
+```
+
+Uses of Intents
+- to start an activity
+- to start a service
+- to broadcast a message to another app or service
+- types of intent ( Explicit, Implicit)
+
+Creating an Intent (Start secondActivity)
+```kotlin
+fun addWordBUttonClick(view:View){
+   val myIntent=Intent(this,AddWordActivity::class.java)
+   myIntent.putExtra("Name",value) //Store extra data key/value pairs
+   startActivity(myIntent)
+}
+```
+After submit button ( Return data to Mainactivity)
+```kotlin
+private val WORDS_FILE_NAME="word.txt"
+
+val word=word_to_add.text.toSTring()
+val defn=word_definition.text.toString()
+val line="$word\t$defn"
+
+//Write into .txt
+val outStream= PrintStream(openFileOutput(WORDS_FILE_NAME,MODE_PRIVATE) //Can put mode append instead
+outStream.println(line)
+outStream.close()
+
+//Send data via Intent, add into main activity
+val myIntent=Intent()
+myIntent.putExtra("word",word)
+myIntent.putExtra("defn", defn)
+setResult(RESULT_OK, myIntent)
+finish()
+```
+Waiting for a Result
+```kotlin
+private val SOME_CODE= 1 //1-65535
+
+fun addWordButtonClick(view:View){
+   val myIntent=Intent(this,AddWordActivity::class.java)
+   startActivity(myIntent, SOME_CODE)
+}
+
+override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?){
+   if (requestCode==SOME_CODE){
+      //unpack the word and definition sent back from AddWordActivity
+      val word=myIntent?.getStringExtra("word") ?:"" //? to handle null, if (myIntent!=null) another way to handle
+      val defn=myIntent?.getStringExtra("defn") ?:""
+      wordToDefn[word]=defn
+      words.add(word)
+   }
+}
+```
