@@ -307,3 +307,70 @@ override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?){
    }
 }
 ```
+
+Lec 17 Services and Notifications
+2 types of service 
+normal and onBind
+
+
+```kotlin
+// MainActivity
+Intent intent=new Intent(this, DownloadService.class);
+intent.putExtra("url",webPageURL);
+StartService(intent)
+```
+
+```kotlin
+// Service
+public int onStartCommand(Intent intent , int flags, int startId){
+   String url = intent.getStringExtra("url");
+   return START_STICKY;
+```
+
+setAction and getAction for intent with multiple action eg.(play, stop, pause)
+//Activity class
+intent.setAction("download")
+
+//Service class
+String action=intent.getAction()
+if(action.equals("download)){...}
+
+Activity -calls-> Service 
+Service-broadcast-> All Apps
+
+```kotlin
+// Service
+public int onStartCommand(Intent intent , int flags, int startId){
+
+   if(intent.getAction().equals("download")){
+      String url = intent.getStringExtra("url");
+      String contents= Downloader.downLoadFake(url)
+
+      // finished! Tell everyone
+      Intent done = new Intent();
+      done.setAction("downloadcomplete");
+      done.putExtra("url",url)
+      done.putExtra("data",contents);
+      sendBroadcast(done);
+   }   
+   return START_STICKY;
+```
+Your Activity can hear broadcasts using a broadcast receiver
+```kotlin
+// MainActivity
+protected void onCreate(Bundle savedInstanceState){
+   super.onCreate(savedInstanceState);
+   setCOntentView(R.layout.activity_download)
+   
+   //Register receiver
+   IntentFilter filter = new IntentFilter();
+   filter.addAction("downloadcomplete");
+   registerReceiver(new MyReceiver(),filter);
+}
+
+private class MyReceiver extends BroadcastReceiver{
+   public void onReceive(Context context, Intent intent){
+   // handle the received broadcast message
+   }
+}
+```
