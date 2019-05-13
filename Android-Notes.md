@@ -308,11 +308,11 @@ override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?){
 }
 ```
 
-Lec 17 Services and Notifications
+# Lec 17 Services and Notifications
 2 types of service 
 normal and onBind
 
-
+(Service allow stuff to run even when app is closed, or when phone bootsup) 
 ```kotlin
 // MainActivity
 Intent intent=new Intent(this, DownloadService.class);
@@ -373,4 +373,106 @@ private class MyReceiver extends BroadcastReceiver{
    // handle the received broadcast message
    }
 }
+```
+Services and threading
+- if the service is busy, the app UI will freeze up
+- to make the service and app more independent and responsive, the service should handle tasks in threads (Concurrency)
+
+```kotlin
+// Service
+public int onStartCommand(Intent intent , int flags, int startId){
+
+   if(intent.getAction().equals("download")){
+      Thread thread= new Thread(new Runnable(){
+         public void run(){
+            String url = intent.getStringExtra("url");
+            String contents= Downloader.downLoadFake(url)
+
+            // finished! Tell everyone
+            Intent done = new Intent();
+            done.setAction("downloadcomplete");
+            done.putExtra("url",url)
+            done.putExtra("data",contents);
+            sendBroadcast(done);
+         }
+      });
+      thread.start();
+   }   
+   return START_STICKY;
+```
+Android provides a class called IntentService(subclass of Service) that runs all of its tasks in a single extra thread.
+- Great for a queue of long-running tasks to do one-at-a-time.
+- Instead of overriding onStartCommand, use onHandleIntent
+
+Notification 
+- A message displayed to the user outside of any apps UI in a top notification drawer area
+- used to indicate system events status of service tasks
+- go along with services normally
+
+- Create a notificaiton using a Notification.Builder
+- Use NotificationManager to send out the notification.
+```kotlin
+Notification.BUilder builder=new Notificaiton.Builder(this)
+               .setContentTitle("title")
+               .setContentText("text")
+               .setAutoCancel(true)
+               .setSmallIcon(R.drawable.icon)
+Notification notification = builder.build();
+
+NotificationManager manager =(NotificationManager)
+   getSystemService(Context.NOTIFICATION_SERVICE);
+manager.notify(ID, notification);
+```
+
+Example (Notification when download is done)
+```kotlin
+// Service
+public int onStartCommand(Intent intent , int flags, int startId){
+
+   if(intent.getAction().equals("download")){
+      Thread thread= new Thread(new Runnable(){
+         public void run(){
+            String url = intent.getStringExtra("url");
+            String contents= Downloader.downLoadFake(url,5000);
+            
+            Notification.Builder builder = new Notification.Builder(this)
+                     .setContentTitle("Download complete")
+                     .setContentText("I received the file:"+url)
+                     .setSmallIcon(R.drawable.icon_download);
+            Notification notification = builder.build();
+
+            NotificationManager manager =(NotificationManager)
+               getSystemService(Context.NOTIFICATION_SERVICE);
+            manager.notify(ID, notification);
+
+            // finished! Tell everyone
+            Intent done = new Intent();
+            done.setAction("downloadcomplete");
+            done.putExtra("url",url)
+            done.putExtra("data",contents);
+            sendBroadcast(done);
+         }
+      });
+      thread.start();
+   }   
+   return START_STICKY;
+```
+Notification with intent ( Notification to do something when you tap on it )
+```kotlin
+Notification.BUilder builder=new Notificaiton.Builder(this)
+               .setContentTitle("title")
+               .setContentText("text")
+               .setAutoCancel(true)
+               .setSmallIcon(R.drawable.icon)
+               
+Intent intent = new Intent(this, ActivityClassName.class);
+Intent.putExtra("key1","value1");
+PendingIntent pending= PendingIntent.getActivity(this, 0, intent, 0);
+builder.setContentIntent(pending);
+
+Notification notification = builder.build();
+
+NotificationManager manager =(NotificationManager)
+   getSystemService(Context.NOTIFICATION_SERVICE);
+manager.notify(ID, notification);
 ```
