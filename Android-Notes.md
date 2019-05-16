@@ -308,7 +308,7 @@ override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?){
 }
 ```
 
-# Lec 17 Services and Notifications
+## Lec 17 Services and Notifications
 2 types of service 
 normal and onBind
 
@@ -476,3 +476,26 @@ NotificationManager manager =(NotificationManager)
    getSystemService(Context.NOTIFICATION_SERVICE);
 manager.notify(ID, notification);
 ```
+## Broadcast receiver
+Listen to sendbroadcast either from own service or other apps/android services
+
+## Lec 11: Databases and SQL
+crud (create read update delete)
+
+- A databse can be located in many places:
+   - within ur android
+   - on a remote webserver
+   - spread throughout many remote servers"in the cloud")
+
+DataBase Software
+Oracle, Microsoft SQL Server Acess, PostgreSQL, MySQL, SQLite
+
+SELECT name
+FROM countries
+WHERE population > 200000;
+
+ERM diagram
+- Entity
+- Relationship
+
+Schema, constraints 
