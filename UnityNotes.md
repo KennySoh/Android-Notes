@@ -62,6 +62,8 @@ physics material
 (h) Counting score
 (i) Exporting the game
 
+https://unity3d.com/learn/tutorials/s/2d-ufo-tutorial
+
 ## Introduction to Unity Part 1B 3D: Getting Started -Roll A Ball
 A very basic introduction to 3D Unity on how to:
 (a) create project,
@@ -82,6 +84,8 @@ engine.
 (n) get inputs
 (o) rigidbody & collider basic function
 (p) add sound effects
+
+https://unity3d.com/pt/learn/tutorials/s/roll-ball-tutorial
 
 ## Introduction to Unity Part 3: 3D Modelling, Scene, Lighting and Rendering
 Unity tutorial: creating believable visuals
