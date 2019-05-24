@@ -499,3 +499,67 @@ ERM diagram
 - Relationship
 
 Schema, constraints 
+
+## SQL Lite
+Data Persistence - saving in a file or database
+Computer memory - 
+Temporary Storage , Permanent Storage 
+SQLite (LOcal DataBase) , MYSQL
+
+".open pets.db"
+".help"
+sqlite3 pets.db
+Type in SQLite "null", Integer,Real, Text
+"Ear buds" -> 0
+"red earings"->1
+
+Attribute -> Storage Class
+".tables"
+
+CREATE TABLE headphones (_id INTEGER name TEXT, price INTEGER, stye INTEGER, in_stock INTEGER, description TEXT);
+".schema headphoens"
+"PRAGMA TABLE_INFO(headphones);"
+"DROP TABLE headphones;"
+".tables"
+
+CRUD- Create, Read, Update, Delete
+
+Create
+- Insert a new pet into the database
+- Insert Dummy List of pets data
+
+Read
+-
+
+Update
+-
+
+Delete
+-
+
+SELECT <columns> FROM <table_name>   
+SELECT * FROM pets
+
+### Create
+Insert a pet into data base 
+INSERT INTO <table_name> (<columns_name_1>,<columns_name_2>,..) 
+               VALUES (<value_1>,<value_2>,...);
+
+INSERT INTO pets (_id,name, breed, gender, weight) 
+               VALUES (1,"Tommy","Pomeranian",1,4);
+
+### READ
+SELECT * FROM pets WHERE _id ==1;
+1 | "Tommy" | " Pomeranian" | 1 | 4 
+
+SELECT * FROM pets WHERE weight>=18;
+SELECT name, weight FROM pets WHERE gender == 1 ORDER BY weight DESC;
+
+### UPDATE
+UPDATE pets SET weight = 20 WHERE _id == 2;
+
+### DELETE
+DELETE FROM <table_name> ;
+DELETE FROM pets;
+
+DELETE FROM pets WHERE _id=<id_pets_interested in> 
