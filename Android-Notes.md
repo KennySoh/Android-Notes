@@ -563,3 +563,44 @@ DELETE FROM <table_name> ;
 DELETE FROM pets;
 
 DELETE FROM pets WHERE _id=<id_pets_interested in> 
+
+
+## Constraint Layout
+https://www.youtube.com/watch?v=rzmB3UxxhaA
+
+- Normal layout are hard to customise and poor performance, animation are tricky
+
+### How is a view drawn in a screen
+- Inflation 
+- Measure parents will measure each child
+- Layout size it
+- Draw -onDraw()
+
+Add a button, add the constraints. 
+- wrap_content, match_constraint, material deisgn guidelines
+- change different size, rotate to test 
+- auto connect and inference 
+- baseline to align the text
+- biasis
+- create chain so all the buttons are equally spaced 
+- guidelines (vertical, horizontal guideline) by (dp, percentage)
+- barrier| adjust accordingly 
+- addGroup and make all invinsible 
+- ratio adjustment for imageview
+- centrer constratint ( top and Btm constratint link to another image btm ) this makes 1st image overlay on the btm of the 2nd image.
+
+### creating complex layout transition
+
+create 2 layouts
+
+``` kotlin
+val constraintSet1 = ConstraintSet()
+Val constraintSet2 = ConstraintSet()
+
+constraintSet2.clone(this, R.layout.activity_movie_rental_large)
+constraintSet1.clone(constraintLayout)
+
+TransitionManager.beginDelayedTransition(constraintLayout)
+constraintSet2.applyTo(constraintLayout)
+```
+-hierachy view 
