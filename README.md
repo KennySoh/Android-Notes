@@ -6,6 +6,7 @@ Normal Text
 _italics_
 
 **Strong**
+# Real Cool Heading
 
 ˜˜100˜˜
 
@@ -40,3 +41,9 @@ Tables
    1. List Four
 - List Four
 ***
+
+Creating an Anchor  
+[Go to Real Cool Heading section](#-real-cool-heading)
+
+Double "spaces" for line break  
+Next Line!
